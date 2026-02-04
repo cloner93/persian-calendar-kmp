@@ -1,22 +1,37 @@
 # Persian Calendar - Kotlin Multiplatform
 
 [![](https://jitpack.io/v/persian-calendar/calendar.svg)](https://jitpack.io/#persian-calendar/calendar)
-[![Build Status](https://github.com/persian-calendar/calendar/workflows/KMP%20Build/badge.svg)](https://github.com/persian-calendar/calendar/actions)
 
-A **Kotlin Multiplatform** library for Persian (Jalali), Islamic (Hijri), Nepali, and Gregorian calendar conversions.
+A **Kotlin Multiplatform** library for Persian (Jalali), Islamic (Hijri) and Gregorian calendar conversions.
 
 ## 🌟 Features
 
-- ✅ **Pure Kotlin** - No platform dependencies
-- ✅ **Multiplatform** - Android, iOS, JVM, JS, WASM
-- ✅ **Lightweight** - Zero external dependencies
-- ✅ **Accurate** - Based on astronomical calculations
-- ✅ **Fast** - Optimized lookup tables where possible
-- ✅ **Well-tested** - Comprehensive test coverage
+-  **Pure Kotlin** - No platform dependencies
+-  **Multiplatform** - Android, iOS, JVM, JS, WASM
+-  **Lightweight** - Zero external dependencies
+-  **Accurate** - Based on astronomical calculations
+-  **Fast** - Optimized lookup tables where possible
+-  **Well-tested** - Comprehensive test coverage
 
 ## 📦 Installation
+### Current Stable Version (Android / JVM)
+Use the latest released version (1.4.0):
 
-### Kotlin Multiplatform
+**Android**
+```kotlin
+// settings.gradle.kts
+repositories {
+    maven("https://jitpack.io")
+}
+
+// build.gradle.kts
+dependencies {
+    implementation("com.github.persian-calendar:calendar:1.4.0")
+}
+```
+
+### Kotlin Multiplatform (Upcoming Feature)
+KMP support is in development (see PR #78) and will be available in a future release (likely 1.5.0+).Once released, you can use it like this:
 
 ```kotlin
 // settings.gradle.kts
@@ -28,27 +43,18 @@ repositories {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("com.github.persian-calendar:calendar:1.5.0")
+            implementation("com.github.persian-calendar:calendar:1.5.0") // or later
         }
     }
 }
 ```
+For now, if you want to test the KMP changes early:
 
-### Android Only
-
-```kotlin
-dependencies {
-    implementation("com.github.persian-calendar:calendar-android:1.5.0")
-}
+Clone the repository and build locally: 
+```gradle
+./gradlew publishToMavenLocal
 ```
-
-### JVM / Desktop
-
-```kotlin
-dependencies {
-    implementation("com.github.persian-calendar:calendar-jvm:1.5.0")
-}
-```
+Then depend on "com.github.persian-calendar:calendar:unspecified" (or the version from local Maven).
 
 ## 🚀 Quick Start
 
@@ -91,7 +97,6 @@ val distance = persian.monthsDistanceTo(PersianDate(1404, 1, 1))
 | Persian (Jalali) | `PersianDate` | `PersianDate(1403, 11, 12)` |
 | Gregorian | `CivilDate` | `CivilDate(2025, 2, 1)` |
 | Islamic (Hijri) | `IslamicDate` | `IslamicDate(1446, 7, 21)` |
-| Nepali (Bikram Sambat) | `NepaliDate` | `NepaliDate(2081, 10, 18)` |
 
 ### Islamic Calendar Variants
 
@@ -201,7 +206,6 @@ val jdn = 2460676L
 val persian = PersianDate(jdn)
 val civil = CivilDate(jdn)
 val islamic = IslamicDate(jdn)
-val nepali = NepaliDate(jdn)
 ```
 
 ## 🏗️ Architecture
@@ -214,8 +218,7 @@ Calendar System
 │
 ├── PersianDate (astronomical + lookup tables)
 ├── CivilDate (Gregorian/Julian hybrid)
-├── IslamicDate (multiple calculation methods)
-└── NepaliDate (Bikram Sambat)
+└── IslamicDate (multiple calculation methods)
 ```
 
 ## 🧪 Testing
@@ -224,25 +227,8 @@ Calendar System
 # Run all tests
 ./gradlew allTests
 
-# Platform-specific tests
-./gradlew jvmTest
-./gradlew androidTest
-./gradlew iosX64Test
-./gradlew jsTest
+./gradlew kotest
 ```
-
-## 📊 Supported Date Ranges
-
-| Calendar | Range | Notes |
-|----------|-------|-------|
-| Persian | 1220-1498 | Lookup table + astronomical |
-| Islamic | 1265-1449 | Iranian Islamic + Umm al-Qura |
-| Nepali | 1975-2199 | Full lookup table |
-| Gregorian | Unlimited | Algorithmic |
-
-## 🤝 Contributing
-
-Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md).
 
 ## 📄 License
 
@@ -255,26 +241,3 @@ You may obtain a copy of the License at
 
     http://www.apache.org/licenses/LICENSE-2.0
 ```
-
-## 🙏 Credits
-
-- Astronomical calculations based on [Calendrical Calculations](http://www.calendarists.com/)
-- Islamic calendar data from [roozbehp/qamari](https://github.com/roozbehp/qamari)
-- Persian calendar tables from [calendar.ut.ac.ir](https://calendar.ut.ac.ir/)
-
-## 📚 Documentation
-
-- [Full Migration Guide](KMP_MIGRATION_GUIDE.md)
-- [API Documentation](https://jitpack.io/com/github/persian-calendar/calendar/latest/javadoc/)
-- [Sample Projects](examples/)
-
-## 🌐 Related Projects
-
-- [Persian Calendar Android App](https://github.com/persian-calendar/persian-calendar)
-- [Islamic Calendar Converter](https://github.com/roozbehp/qamari)
-
----
-
-**Made with ❤️ by the Persian Calendar team**
-
-[![Star History](https://api.star-history.com/svg?repos=persian-calendar/calendar&type=Date)](https://star-history.com/#persian-calendar/calendar&Date)
